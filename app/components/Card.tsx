@@ -1,7 +1,7 @@
 interface CardProps {
     angka: number;
     judul: string;
-    deskripsi: string
+    deskripsi: string;
 }
 
 const Card = ({angka, judul, deskripsi} : CardProps) => {
