@@ -22,7 +22,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
 
   const maxVal = Math.max(5, ...loans, ...returns);
 
-  // SVG Chart Dimensions
   const width = 650;
   const height = 220;
   const paddingX = 40;
@@ -49,7 +48,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
     if (coords.length === 0) return '';
     return coords.reduce((acc, pt, i) => {
       if (i === 0) return `M ${pt.x} ${pt.y}`;
-      // Smooth cubic bezier curves
       const prev = coords[i - 1];
       const cx1 = prev.x + (pt.x - prev.x) / 2;
       const cy1 = prev.y;
@@ -74,7 +72,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
   const returnPath = makePath(returnCoords);
   const returnArea = makeAreaPath(returnCoords);
 
-  // Horizontal grid lines
   const gridLevels = [0, 0.25, 0.5, 0.75, 1];
 
   return (
@@ -90,7 +87,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Legend */}
           <div className="flex items-center gap-4 text-xs font-medium mr-2">
             <span className="flex items-center gap-1.5 text-zinc-600 dark:text-zinc-400">
               <span className="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block"></span>
@@ -102,7 +98,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
             </span>
           </div>
 
-          {/* Time Filter Pills */}
           <div className="flex items-center bg-zinc-100 dark:bg-zinc-800/80 p-0.5 rounded-lg border border-zinc-200/60 dark:border-zinc-700/60">
             {(['7d', '30d', '12m'] as const).map((r) => (
               <button
@@ -141,7 +136,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
             </linearGradient>
           </defs>
 
-          {/* Grid lines */}
           {gridLevels.map((lvl, i) => {
             const y = height - paddingY - lvl * chartHeight;
             const labelVal = Math.round(lvl * maxVal);
@@ -169,7 +163,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
             );
           })}
 
-          {/* Loan Area & Line */}
           {loanArea && <path d={loanArea} fill="url(#loanGrad)" />}
           {loanPath && (
             <path
@@ -182,7 +175,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
             />
           )}
 
-          {/* Return Area & Line */}
           {returnArea && <path d={returnArea} fill="url(#returnGrad)" />}
           {returnPath && (
             <path
@@ -195,7 +187,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
             />
           )}
 
-          {/* Points & Hover lines */}
           {labels.map((lbl, idx) => {
             const lPt = loanCoords[idx];
             const rPt = returnCoords[idx];
@@ -208,7 +199,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
                 onMouseLeave={() => setHoveredIdx(null)}
                 className="cursor-pointer"
               >
-                {/* Vertical hover line */}
                 {isHovered && (
                   <line
                     x1={lPt.x}
@@ -221,7 +211,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
                   />
                 )}
 
-                {/* Point for Loans */}
                 <circle
                   cx={lPt.x}
                   cy={lPt.y}
@@ -232,7 +221,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
                   className="transition-all"
                 />
 
-                {/* Point for Returns */}
                 <circle
                   cx={rPt.x}
                   cy={rPt.y}
@@ -243,7 +231,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
                   className="transition-all"
                 />
 
-                {/* X Axis Label */}
                 <text
                   x={lPt.x}
                   y={height - 10}
@@ -261,7 +248,6 @@ export function TrendChart({ data, range, onRangeChange, isLoading }: TrendChart
           })}
         </svg>
 
-        {/* Hover Tooltip Box */}
         {hoveredIdx !== null && loanCoords[hoveredIdx] && (
           <div
             className="absolute -top-1 pointer-events-none transform -translate-x-1/2 bg-zinc-900/95 dark:bg-zinc-800/95 text-white p-2.5 rounded-lg shadow-xl text-xs z-20 backdrop-blur-xs border border-zinc-700/60"

@@ -23,11 +23,9 @@ export default function ReturnsPage() {
   const [settings, setSettings] = useState<LibrarySettings | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Search & Selection
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLoan, setSelectedLoan] = useState<Loan | null>(null);
 
-  // Return Processing Form State
   const [selectedItemIds, setSelectedItemIds] = useState<string[]>([]);
   const todayStr = new Date().toISOString().split('T')[0];
   const [returnDate, setReturnDate] = useState(todayStr);
@@ -46,7 +44,6 @@ export default function ReturnsPage() {
       ]);
 
       if (loanRes.success) {
-        // filter only loans that have unreturned items
         const pending = (loanRes.data as Loan[]).filter(
           (l) => l.status === 'ACTIVE' || l.status === 'PARTIAL' || l.status === 'OVERDUE'
         );
@@ -73,7 +70,6 @@ export default function ReturnsPage() {
     setReturnNotes('');
     setReturnDate(todayStr);
 
-    // Default: select all currently borrowed items in this loan
     const unreturnedItemIds = loan.items.filter((i) => i.status !== 'RETURNED').map((i) => i.id);
     setSelectedItemIds(unreturnedItemIds);
   };
@@ -86,7 +82,6 @@ export default function ReturnsPage() {
     }
   };
 
-  // Calculate overdue and fine dynamically based on returnDate
   const calculateLateInfo = () => {
     if (!selectedLoan) return { isLate: false, daysLate: 0, totalFineEst: 0 };
 
@@ -136,7 +131,6 @@ export default function ReturnsPage() {
         message: `Pengembalian buku berhasil dicatat! Status transaksi kini: ${json.data.status}. Stok buku telah dikembalikan ke rak.`,
       });
 
-      // Reload list and update selected loan
       loadData();
       if (json.data.status === 'RETURNED') {
         setSelectedLoan(null);
@@ -165,7 +159,6 @@ export default function ReturnsPage() {
 
   return (
     <div className="space-y-8 pb-12">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-zinc-800">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
@@ -187,14 +180,12 @@ export default function ReturnsPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Left Column: Cari & Pilih Transaksi Peminjaman (5 Cols) */}
         <div className="lg:col-span-5 space-y-4">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-3xl p-5 shadow-xs space-y-4">
             <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
               Pilih Transaksi Peminjaman
             </h3>
 
-            {/* Search */}
             <div className="relative">
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
               <input
@@ -206,7 +197,6 @@ export default function ReturnsPage() {
               />
             </div>
 
-            {/* List of active loans */}
             <div className="space-y-2.5 max-h-[550px] overflow-y-auto pr-1">
               {loading ? (
                 <div className="py-12 text-center">
@@ -268,7 +258,6 @@ export default function ReturnsPage() {
           </div>
         </div>
 
-        {/* Right Column: Detail & Eksekusi Pengembalian (7 Cols) */}
         <div className="lg:col-span-7">
           {!selectedLoan ? (
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-3xl p-12 text-center h-full flex flex-col items-center justify-center space-y-3">
@@ -287,7 +276,6 @@ export default function ReturnsPage() {
               onSubmit={handleProcessReturn}
               className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6"
             >
-              {/* Transaction Header Info */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800">
                 <div>
                   <div className="flex items-center gap-2">
@@ -329,7 +317,6 @@ export default function ReturnsPage() {
                 </div>
               )}
 
-              {/* Book Items to Return (Multi-select / Partial return) */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
@@ -394,7 +381,6 @@ export default function ReturnsPage() {
                 </div>
               </div>
 
-              {/* Tanggal Pengembalian Aktual */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 <div>
                   <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
@@ -426,7 +412,6 @@ export default function ReturnsPage() {
                 </div>
               </div>
 
-              {/* Denda Keterlambatan Info Card */}
               {isLate && (
                 <div className="p-4 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 space-y-3">
                   <div className="flex items-center justify-between">
@@ -461,7 +446,6 @@ export default function ReturnsPage() {
                 </div>
               )}
 
-              {/* Catatan Pengembalian */}
               <div>
                 <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
                   Catatan Pengembalian / Kondisi Buku
@@ -475,7 +459,6 @@ export default function ReturnsPage() {
                 ></textarea>
               </div>
 
-              {/* Submit */}
               <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-end gap-3">
                 <button
                   type="button"

@@ -22,17 +22,14 @@ export default function HistoryPage() {
   const [loans, setLoans] = useState<Loan[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Filters
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
 
-  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
-  // Detail Modal
   const [selectedLoan, setSelectedLoan] = useState<Loan | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [settling, setSettling] = useState(false);
@@ -70,7 +67,6 @@ export default function HistoryPage() {
     }
   };
 
-  // CSV Export
   const exportToCSV = () => {
     const headers = [
       'Kode Transaksi',
@@ -134,7 +130,6 @@ export default function HistoryPage() {
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-zinc-800">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
@@ -165,7 +160,6 @@ export default function HistoryPage() {
         </div>
       </div>
 
-      {/* Filter Bar */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl p-4 shadow-xs space-y-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           <div className="relative">
@@ -245,7 +239,6 @@ export default function HistoryPage() {
         </div>
       </div>
 
-      {/* Table */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl shadow-xs overflow-hidden">
         {loading ? (
           <div className="p-16 text-center space-y-3">
@@ -339,7 +332,6 @@ export default function HistoryPage() {
           </div>
         )}
 
-        {/* Pagination Footer */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between px-4 py-3 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 text-xs">
             <span className="text-zinc-500">
@@ -368,7 +360,6 @@ export default function HistoryPage() {
         )}
       </div>
 
-      {/* MODAL: Detail Transaksi */}
       {isDetailOpen && selectedLoan && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs overflow-y-auto">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl w-full max-w-xl shadow-2xl overflow-hidden my-8">
@@ -419,7 +410,6 @@ export default function HistoryPage() {
                 </div>
               </div>
 
-              {/* Items List */}
               <div>
                 <h5 className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">
                   Daftar Eksemplar Buku Dipinjam ({selectedLoan.items.length})
@@ -451,7 +441,6 @@ export default function HistoryPage() {
                 </div>
               </div>
 
-              {/* Denda section */}
               {selectedLoan.totalFine > 0 && (
                 <div className="p-4 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 flex items-center justify-between">
                   <div>

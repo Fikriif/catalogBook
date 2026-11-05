@@ -10,7 +10,6 @@ export async function GET(request: Request) {
 
     const stats = libraryService.getDashboardStats();
 
-    // If range is 30d or 12m, adjust trendData
     if (range === '30d') {
       const labels: string[] = [];
       const loans: number[] = [];

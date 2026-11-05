@@ -30,7 +30,6 @@ export function AppSidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
   const [overdueCount, setOverdueCount] = useState<number>(0);
 
-  // Fetch overdue count for sidebar badge
   useEffect(() => {
     fetch('/api/dashboard/stats')
       .then((res) => res.json())
@@ -78,7 +77,6 @@ export function AppSidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
 
   const sidebarContent = (
     <div className="flex flex-col h-full bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 transition-all duration-300">
-      {/* Brand Header */}
       <div className="h-16 flex items-center justify-between px-4 border-b border-zinc-200/80 dark:border-zinc-800">
         <Link href="/pages/dashboard" className="flex items-center gap-3 overflow-hidden">
           <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 flex items-center justify-center shrink-0 shadow-xs">
@@ -94,7 +92,6 @@ export function AppSidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
           )}
         </Link>
 
-        {/* Mobile Close Button */}
         <button
           onClick={() => setMobileOpen(false)}
           className="lg:hidden p-1.5 rounded-lg text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"
@@ -102,7 +99,6 @@ export function AppSidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
           <X className="w-5 h-5" />
         </button>
 
-        {/* Desktop Collapse Toggle */}
         <button
           onClick={() => setCollapsed(!collapsed)}
           className="hidden lg:flex p-1.5 rounded-lg text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
@@ -112,7 +108,6 @@ export function AppSidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
         </button>
       </div>
 
-      {/* Navigation Links */}
       <div className="flex-1 overflow-y-auto px-3 py-4 space-y-6 scrollbar-thin">
         {navItems.map((group, gIdx) => (
           <div key={gIdx} className="space-y-1">
@@ -140,14 +135,12 @@ export function AppSidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
                   <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white dark:text-zinc-900' : 'text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100'}`} />
                   {!collapsed && <span className="truncate flex-1">{item.label}</span>}
 
-                  {/* Badge */}
                   {!collapsed && item.badge !== undefined && (
                     <span className="ml-auto inline-flex items-center justify-center px-2 py-0.5 text-[11px] font-bold rounded-full bg-rose-500 text-white animate-pulse">
                       {item.badge}
                     </span>
                   )}
 
-                  {/* Collapsed Badge Dot */}
                   {collapsed && item.badge !== undefined && (
                     <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-rose-500"></span>
                   )}
@@ -158,7 +151,6 @@ export function AppSidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
         ))}
       </div>
 
-      {/* Footer Info */}
       <div className="p-3 border-t border-zinc-200/80 dark:border-zinc-800">
         {!collapsed ? (
           <div className="px-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200/60 dark:border-zinc-800">
@@ -179,14 +171,12 @@ export function AppSidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
 
   return (
     <>
-      {/* Desktop Sidebar */}
       <aside className={`hidden lg:block shrink-0 transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'}`}>
         <div className={`fixed top-0 bottom-0 left-0 transition-all duration-300 z-30 ${collapsed ? 'w-20' : 'w-64'}`}>
           {sidebarContent}
         </div>
       </aside>
 
-      {/* Mobile Backdrop & Drawer */}
       {mobileOpen && (
         <div
           className="fixed inset-0 bg-black/40 backdrop-blur-xs z-40 lg:hidden"

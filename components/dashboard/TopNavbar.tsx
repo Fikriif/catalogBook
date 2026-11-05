@@ -30,7 +30,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [alerts, setAlerts] = useState<{ overdue: any[]; dueSoon: any[] }>({ overdue: [], dueSoon: [] });
 
-  // Quick Global Search
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<{ books: any[]; members: any[]; loans: any[] }>({
     books: [],
@@ -42,7 +41,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
   const searchRef = useRef<HTMLDivElement>(null);
   const notifRef = useRef<HTMLDivElement>(null);
 
-  // Derive Page Title & Breadcrumb from pathname
   const getPageInfo = () => {
     switch (pathname) {
       case '/pages/dashboard':
@@ -72,7 +70,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
 
   const { title, breadcrumb } = getPageInfo();
 
-  // Load notification alerts
   const loadAlerts = () => {
     fetch('/api/dashboard/stats')
       .then((r) => r.json())
@@ -91,7 +88,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
     loadAlerts();
   }, [pathname]);
 
-  // Global search effect
   useEffect(() => {
     if (!searchQuery.trim() || searchQuery.length < 2) {
       setSearchResults({ books: [], members: [], loans: [] });
@@ -122,7 +118,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
-  // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
@@ -141,7 +136,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
   return (
     <>
       <header className="sticky top-0 z-20 h-16 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200/80 dark:border-zinc-800 px-4 lg:px-8 flex items-center justify-between gap-4">
-        {/* Left: Mobile Toggle & Page Title */}
         <div className="flex items-center gap-3 min-w-0">
           <button
             onClick={onOpenMobileSidebar}
@@ -163,7 +157,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
           </div>
         </div>
 
-        {/* Center: Global Search Bar */}
         <div ref={searchRef} className="relative hidden md:block w-72 lg:w-96">
           <div className="relative">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
@@ -187,7 +180,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
             )}
           </div>
 
-          {/* Search Dropdown Results */}
           {searchDropdownOpen && (
             <div className="absolute left-0 right-0 top-full mt-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl p-2 z-50 max-h-96 overflow-y-auto">
               {isSearching ? (
@@ -200,7 +192,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {/* Books */}
                   {searchResults.books.length > 0 && (
                     <div>
                       <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
@@ -229,7 +220,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
                     </div>
                   )}
 
-                  {/* Members */}
                   {searchResults.members.length > 0 && (
                     <div>
                       <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
@@ -258,7 +248,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
                     </div>
                   )}
 
-                  {/* Loans */}
                   {searchResults.loans.length > 0 && (
                     <div>
                       <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
@@ -292,9 +281,7 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
           )}
         </div>
 
-        {/* Right: Actions, Notifications, & Profile */}
         <div className="flex items-center gap-3">
-          {/* Quick New Loan CTA */}
           <button
             onClick={() => setIsLoanModalOpen(true)}
             className="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-semibold shadow-xs transition-all"
@@ -303,7 +290,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
             <span>+ Peminjaman</span>
           </button>
 
-          {/* Notification Bell Dropdown */}
           <div ref={notifRef} className="relative">
             <button
               onClick={() => setIsNotificationOpen(!isNotificationOpen)}
@@ -318,7 +304,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
               )}
             </button>
 
-            {/* Notification Drawer */}
             {isNotificationOpen && (
               <div className="absolute right-0 top-full mt-2 w-80 sm:w-96 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl p-4 z-50">
                 <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800 mb-3">
@@ -345,7 +330,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
                     </div>
                   ) : (
                     <>
-                      {/* Overdue */}
                       {alerts.overdue.map((l) => (
                         <div
                           key={l.id}
@@ -374,7 +358,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
                         </div>
                       ))}
 
-                      {/* Due soon */}
                       {alerts.dueSoon.map((l) => (
                         <div
                           key={l.id}
@@ -409,7 +392,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
 
           <div className="h-6 w-px bg-zinc-200 dark:bg-zinc-800"></div>
 
-          {/* User Profile Info from Clerk */}
           <div className="flex items-center gap-2.5">
             <div className="hidden sm:flex flex-col text-right">
               <span className="text-xs font-semibold text-zinc-900 dark:text-zinc-100 leading-tight">
@@ -422,7 +404,6 @@ export function TopNavbar({ onOpenMobileSidebar }: TopNavbarProps) {
         </div>
       </header>
 
-      {/* New Loan Modal instance */}
       <NewLoanModal
         isOpen={isLoanModalOpen}
         onClose={() => setIsLoanModalOpen(false)}

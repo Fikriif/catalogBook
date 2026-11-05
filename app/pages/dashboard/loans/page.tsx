@@ -27,7 +27,6 @@ export default function LoansPage() {
   const [settings, setSettings] = useState<LibrarySettings | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Form State
   const [selectedMemberId, setSelectedMemberId] = useState('');
   const [selectedBookIds, setSelectedBookIds] = useState<string[]>([]);
   const todayStr = new Date().toISOString().split('T')[0];
@@ -140,7 +139,6 @@ export default function LoansPage() {
         transactionCode: json.data.transactionCode,
       });
 
-      // Reset form
       setSelectedMemberId('');
       setSelectedBookIds([]);
       setNotes('');
@@ -157,7 +155,6 @@ export default function LoansPage() {
 
   return (
     <div className="space-y-8 pb-12">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-zinc-800">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
@@ -179,7 +176,6 @@ export default function LoansPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Form Peminjaman Utama (2 Cols) */}
         <div className="lg:col-span-2">
           <form
             onSubmit={handleSubmit}
@@ -226,7 +222,6 @@ export default function LoansPage() {
               </div>
             )}
 
-            {/* 1. Pilih Anggota */}
             <div className="space-y-2">
               <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
                 1. Pilih Anggota Peminjam *
@@ -267,7 +262,6 @@ export default function LoansPage() {
               )}
             </div>
 
-            {/* 2. Pilih Buku & Keranjang */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
@@ -296,7 +290,6 @@ export default function LoansPage() {
                   ))}
               </select>
 
-              {/* Keranjang Buku */}
               <div className="space-y-2.5 mt-3">
                 {selectedBookIds.length === 0 ? (
                   <div className="p-8 rounded-2xl border border-dashed border-zinc-300 dark:border-zinc-700 text-center text-xs text-zinc-400">
@@ -338,7 +331,6 @@ export default function LoansPage() {
               </div>
             </div>
 
-            {/* 3. Tanggal Pinjam & Jatuh Tempo */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div>
                 <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
@@ -367,7 +359,6 @@ export default function LoansPage() {
               </div>
             </div>
 
-            {/* 4. Catatan */}
             <div>
               <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
                 Catatan Petugas (Opsional)
@@ -381,7 +372,6 @@ export default function LoansPage() {
               ></textarea>
             </div>
 
-            {/* Submit */}
             <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-end">
               <button
                 type="submit"
@@ -404,9 +394,7 @@ export default function LoansPage() {
           </form>
         </div>
 
-        {/* Info Petugas & Peminjaman Aktif Terkini (1 Col) */}
         <div className="space-y-6">
-          {/* Ketentuan Operasional */}
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-3xl p-6 shadow-xs space-y-4">
             <div className="flex items-center gap-2 pb-3 border-b border-zinc-100 dark:border-zinc-800">
               <ShieldCheck className="w-5 h-5 text-emerald-600" />
@@ -431,7 +419,6 @@ export default function LoansPage() {
             </ul>
           </div>
 
-          {/* Sirkulasi Aktif Terkini */}
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-3xl p-6 shadow-xs">
             <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800 mb-4">
               <h4 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">

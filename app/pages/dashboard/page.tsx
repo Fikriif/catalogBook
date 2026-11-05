@@ -85,7 +85,6 @@ export default function DashboardOverviewPage() {
 
   return (
     <div className="space-y-8 pb-10">
-      {/* Welcome Banner */}
       <div className="relative overflow-hidden rounded-3xl bg-zinc-900 text-white p-6 sm:p-8 shadow-sm">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-xl">
@@ -120,11 +119,9 @@ export default function DashboardOverviewPage() {
           </div>
         </div>
 
-        {/* Ambient subtle background effect */}
         <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
       </div>
 
-      {/* 6 Key Statistics Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         <StatCard
           title="Total Buku"
@@ -181,9 +178,7 @@ export default function DashboardOverviewPage() {
         />
       </div>
 
-      {/* Circulation Trends Graph & Alerts Column */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Trend Chart (2 columns on lg) */}
         <div className="lg:col-span-2">
           <TrendChart
             data={trendData}
@@ -193,7 +188,6 @@ export default function DashboardOverviewPage() {
           />
         </div>
 
-        {/* Section: Peringatan dan Perhatian */}
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl p-6 shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800 mb-4">
@@ -209,7 +203,6 @@ export default function DashboardOverviewPage() {
             </div>
 
             <div className="space-y-3 max-h-72 overflow-y-auto pr-1">
-              {/* Overdue */}
               {alerts.overdue.map((l) => (
                 <Link
                   key={l.id}
@@ -233,7 +226,6 @@ export default function DashboardOverviewPage() {
                 </Link>
               ))}
 
-              {/* Due soon */}
               {alerts.dueSoon.map((l) => (
                 <Link
                   key={l.id}
@@ -257,7 +249,6 @@ export default function DashboardOverviewPage() {
                 </Link>
               ))}
 
-              {/* Low stock */}
               {alerts.lowStock.map((b) => (
                 <Link
                   key={b.id}
@@ -301,9 +292,7 @@ export default function DashboardOverviewPage() {
         </div>
       </div>
 
-      {/* Grid: Aktivitas Terbaru & Buku Populer */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Aktivitas Terbaru (2 cols) */}
         <div className="lg:col-span-2 bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl p-6 shadow-xs">
           <div className="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-zinc-800 mb-4">
             <div>
@@ -381,7 +370,6 @@ export default function DashboardOverviewPage() {
           </div>
         </div>
 
-        {/* Buku Populer (1 col) */}
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl p-6 shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800 mb-4">
@@ -415,7 +403,6 @@ export default function DashboardOverviewPage() {
                         Sisa: {item.availableCopies}/{item.totalCopies}
                       </span>
                     </div>
-                    {/* Progress bar */}
                     <div className="w-full h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 mt-1.5 overflow-hidden">
                       <div
                         className="h-full bg-blue-600 rounded-full"

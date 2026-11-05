@@ -155,7 +155,6 @@ export default function ReportsPage() {
 
   return (
     <div className="space-y-6 pb-12 print:p-0">
-      {/* Header (hidden in print) */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-zinc-800 print:hidden">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
@@ -186,7 +185,6 @@ export default function ReportsPage() {
         </div>
       </div>
 
-      {/* Report Selection Tabs (hidden in print) */}
       <div className="flex items-center gap-2 overflow-x-auto pb-1 print:hidden scrollbar-none">
         {reportTabs.map((tab) => {
           const Icon = tab.icon;
@@ -208,7 +206,6 @@ export default function ReportsPage() {
         })}
       </div>
 
-      {/* Date Filter Bar (hidden in print) */}
       {(reportType === 'loans' || reportType === 'returns') && (
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl p-4 shadow-xs print:hidden">
           <div className="flex items-center gap-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300">
@@ -251,7 +248,6 @@ export default function ReportsPage() {
         </div>
       )}
 
-      {/* Printable Report Header */}
       <div className="hidden print:block text-center border-b pb-4 mb-6">
         <h1 className="text-xl font-bold uppercase tracking-wider">
           Perpustakaan Digital Arsip
@@ -264,7 +260,6 @@ export default function ReportsPage() {
         </p>
       </div>
 
-      {/* KPI Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {reportType === 'loans' && (
           <>
@@ -359,7 +354,6 @@ export default function ReportsPage() {
         )}
       </div>
 
-      {/* Report Data Table */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl shadow-xs overflow-hidden">
         {loading ? (
           <div className="p-16 text-center space-y-3">

@@ -33,7 +33,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, error: 'Pilih minimal satu buku.' }, { status: 400 });
     }
 
-    // Try to get logged in user from Clerk
     let staffName = 'Petugas Perpustakaan';
     let staffId: string | undefined = undefined;
     try {
@@ -43,7 +42,6 @@ export async function POST(request: Request) {
         staffId = user.id;
       }
     } catch {
-      // ignore auth fetch failure if outside clerk context
     }
 
     const created = libraryService.createLoan({

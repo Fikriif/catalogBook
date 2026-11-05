@@ -23,7 +23,6 @@ export function NewLoanModal({ isOpen, onClose, onSuccess }: NewLoanModalProps) 
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  // Loan and due dates
   const todayStr = new Date().toISOString().split('T')[0];
   const [loanDate, setLoanDate] = useState(todayStr);
 
@@ -137,7 +136,6 @@ export function NewLoanModal({ isOpen, onClose, onSuccess }: NewLoanModalProps) 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs overflow-y-auto">
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden my-8">
-        {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800">
           <div>
             <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
@@ -177,7 +175,6 @@ export function NewLoanModal({ isOpen, onClose, onSuccess }: NewLoanModalProps) 
               </div>
             )}
 
-            {/* 1. Pilih Anggota */}
             <div>
               <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
                 1. Identitas Anggota Peminjam *
@@ -210,7 +207,6 @@ export function NewLoanModal({ isOpen, onClose, onSuccess }: NewLoanModalProps) 
               )}
             </div>
 
-            {/* 2. Pilih Buku */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
@@ -239,7 +235,6 @@ export function NewLoanModal({ isOpen, onClose, onSuccess }: NewLoanModalProps) 
                   ))}
               </select>
 
-              {/* Selected books list */}
               <div className="mt-3 space-y-2">
                 {selectedBookIds.length === 0 ? (
                   <div className="p-4 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700 text-center text-xs text-zinc-400">
@@ -282,7 +277,6 @@ export function NewLoanModal({ isOpen, onClose, onSuccess }: NewLoanModalProps) 
               </div>
             </div>
 
-            {/* 3. Waktu Peminjaman & Jatuh Tempo */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div>
                 <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
@@ -314,7 +308,6 @@ export function NewLoanModal({ isOpen, onClose, onSuccess }: NewLoanModalProps) 
               </div>
             </div>
 
-            {/* 4. Catatan Tambahan */}
             <div>
               <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
                 Catatan Transaksi (Opsional)
@@ -328,7 +321,6 @@ export function NewLoanModal({ isOpen, onClose, onSuccess }: NewLoanModalProps) 
               ></textarea>
             </div>
 
-            {/* Actions */}
             <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800">
               <button
                 type="button"

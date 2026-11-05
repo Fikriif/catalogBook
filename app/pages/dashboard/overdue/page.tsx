@@ -23,7 +23,6 @@ export default function OverduePage() {
   const [settings, setSettings] = useState<LibrarySettings | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Filters
   const [search, setSearch] = useState('');
   const [delayFilter, setDelayFilter] = useState<'ALL' | 'SHORT' | 'MEDIUM' | 'LONG'>('ALL');
 
@@ -74,7 +73,7 @@ export default function OverduePage() {
 
       return matchesSearch && matchesDelay;
     })
-    .sort((a, b) => getDaysLate(b.dueDate) - getDaysLate(a.dueDate)); // Sort longest overdue first
+    .sort((a, b) => getDaysLate(b.dueDate) - getDaysLate(a.dueDate));
 
   const totalOverdueItems = filtered.reduce(
     (sum, l) => sum + l.items.filter((i) => i.status !== 'RETURNED').length,
@@ -84,7 +83,6 @@ export default function OverduePage() {
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-zinc-800">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
@@ -105,7 +103,6 @@ export default function OverduePage() {
         </button>
       </div>
 
-      {/* Summary Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/60 rounded-2xl p-5">
           <span className="text-xs font-semibold text-rose-800 dark:text-rose-300 uppercase tracking-wider">
@@ -144,7 +141,6 @@ export default function OverduePage() {
         </div>
       </div>
 
-      {/* Filter Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl p-4 shadow-xs">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <div className="relative w-full sm:w-80">
@@ -175,7 +171,6 @@ export default function OverduePage() {
         </span>
       </div>
 
-      {/* Table */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl shadow-xs overflow-hidden">
         {loading ? (
           <div className="p-16 text-center space-y-3">

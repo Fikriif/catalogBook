@@ -26,24 +26,20 @@ export default function BooksPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Filters & Search
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('ALL');
   const [selectedAvailability, setSelectedAvailability] = useState('ALL');
   const [sortBy, setSortBy] = useState<'title' | 'code' | 'stock' | 'year'>('title');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
-  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
-  // Modals
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<(Book & { categoryName: string }) | null>(null);
 
-  // Form State
   const [formMode, setFormMode] = useState<'create' | 'edit'>('create');
   const [formData, setFormData] = useState({
     title: '',
@@ -176,7 +172,6 @@ export default function BooksPage() {
     }
   };
 
-  // Filtered & Sorted books
   const filteredBooks = books
     .filter((b) => {
       const matchesSearch =
@@ -205,13 +200,11 @@ export default function BooksPage() {
       return sortOrder === 'asc' ? comparison : -comparison;
     });
 
-  // Pagination calculation
   const totalPages = Math.ceil(filteredBooks.length / itemsPerPage) || 1;
   const paginatedBooks = filteredBooks.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-zinc-800">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
@@ -232,10 +225,8 @@ export default function BooksPage() {
         </button>
       </div>
 
-      {/* Filter & Control Bar */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl p-4 shadow-xs space-y-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {/* Search */}
           <div className="relative">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
             <input
@@ -250,7 +241,6 @@ export default function BooksPage() {
             />
           </div>
 
-          {/* Category Filter */}
           <div>
             <select
               value={selectedCategory}
@@ -269,7 +259,6 @@ export default function BooksPage() {
             </select>
           </div>
 
-          {/* Availability Filter */}
           <div>
             <select
               value={selectedAvailability}
@@ -285,7 +274,6 @@ export default function BooksPage() {
             </select>
           </div>
 
-          {/* Sorting */}
           <div className="flex items-center gap-2">
             <select
               value={sortBy}
@@ -313,7 +301,6 @@ export default function BooksPage() {
         </div>
       </div>
 
-      {/* Book Table */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl shadow-xs overflow-hidden">
         {loading ? (
           <div className="p-16 text-center space-y-3">
@@ -428,7 +415,6 @@ export default function BooksPage() {
           </div>
         )}
 
-        {/* Pagination Footer */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between px-4 py-3 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 text-xs">
             <span className="text-zinc-500">
@@ -457,7 +443,6 @@ export default function BooksPage() {
         )}
       </div>
 
-      {/* MODAL: Tambah / Edit Buku */}
       {isFormOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs overflow-y-auto">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden my-8">
@@ -655,7 +640,6 @@ export default function BooksPage() {
         </div>
       )}
 
-      {/* MODAL: Detail Buku */}
       {isDetailOpen && selectedBook && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
@@ -739,7 +723,6 @@ export default function BooksPage() {
         </div>
       )}
 
-      {/* MODAL: Konfirmasi Hapus Buku */}
       {isDeleteOpen && selectedBook && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl w-full max-w-md shadow-2xl p-6">

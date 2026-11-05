@@ -27,11 +27,9 @@ export default function MembersPage() {
   const [members, setMembers] = useState<(Member & { activeLoansCount: number })[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Filters
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'ACTIVE' | 'INACTIVE'>('ALL');
 
-  // Modals
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -187,7 +185,6 @@ export default function MembersPage() {
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-zinc-800">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
@@ -208,7 +205,6 @@ export default function MembersPage() {
         </button>
       </div>
 
-      {/* Filter Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl p-4 shadow-xs">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <div className="relative w-full sm:w-80">
@@ -238,7 +234,6 @@ export default function MembersPage() {
         </span>
       </div>
 
-      {/* Table */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-2xl shadow-xs overflow-hidden">
         {loading ? (
           <div className="p-16 text-center space-y-3">
@@ -340,7 +335,6 @@ export default function MembersPage() {
         )}
       </div>
 
-      {/* MODAL: Form Anggota */}
       {isFormOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl w-full max-w-lg shadow-2xl p-6">
@@ -491,7 +485,6 @@ export default function MembersPage() {
         </div>
       )}
 
-      {/* MODAL: Detail & Riwayat Anggota */}
       {isDetailOpen && selectedMember && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs overflow-y-auto">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden my-8">
@@ -509,7 +502,6 @@ export default function MembersPage() {
             </div>
 
             <div className="p-6 space-y-6 text-xs">
-              {/* Member Card Profile */}
               <div className="p-4 rounded-2xl bg-zinc-900 text-white flex items-center justify-between">
                 <div>
                   <span className="text-[10px] tracking-wider uppercase text-zinc-400">
@@ -534,7 +526,6 @@ export default function MembersPage() {
                 </div>
               </div>
 
-              {/* Loans History Table */}
               <div>
                 <h5 className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">
                   Riwayat Peminjaman Anggota ({selectedMember.loans?.length || 0} Transaksi)
@@ -593,7 +584,6 @@ export default function MembersPage() {
         </div>
       )}
 
-      {/* MODAL: Konfirmasi Hapus */}
       {isDeleteOpen && selectedMember && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl w-full max-w-md shadow-2xl p-6">
